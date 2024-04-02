@@ -5,20 +5,20 @@ import seaborn as sns
 import pickle
 from sklearn.preprocessing import QuantileTransformer, MinMaxScaler
 from scipy.stats import boxcox
-
+import os
 # Using menu
 st.title("DATA SCIENCE PROJECT")
 menu = ["Introduction", "My Project", "Predict New Data"]
 choice = st.sidebar.selectbox('Danh mục', menu)
 
 #------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 data = pd.read_csv('OnlineRetail.csv', encoding='latin1')
 data_positive = pd.read_csv('data_positive.csv', encoding='latin1')
 data_RFM_raw = pd.read_csv('data_RFM_raw.csv', encoding='latin1')
 data_RFM_mean = pd.read_csv('data_RFM_mean.csv', encoding='latin1')
 data_RFM_with_id = pd.read_csv('data_RFM_with_id.csv', encoding='latin1')
 data_RFM_train = pd.read_csv('data_RFM_train.csv', encoding='latin1')
-
 # Model 
 file_name_1 = 'rfm_model.sav'
 loaded_model_1= pickle.load(open(file_name_1, 'rb' ))
@@ -84,12 +84,12 @@ elif choice == 'My Project':
 
     st.subheader("II.Trực quan hóa dữ liệu")
     st.write("### **1.Doanh thu theo quốc gia**")
-    image = open("Truc_quan_hoa/revenue_by_country.png", "rb").read()
+    image = open("revenue_by_country.png", "rb").read()
     st.image(image, use_column_width=True)
     st.write("""### **Nhận xét:**
 #### - **Các khách hàng lớn thường tập trung ở UK, đây là một thị trường lớn cần tập trung vào quốc gia này.**""")
     st.write("### **2.Doanh thu theo tháng**")
-    image = open("Truc_quan_hoa/revenue_by_month.png", "rb").read()
+    image = open("revenue_by_month.png", "rb").read()
     st.image(image, use_column_width=True)
     st.write("""### **Nhận xét:**
 #### - **Nếu chỉ xét ở năm 2011, doanh thu 8 tháng đầu năm khá ổn định ở mức 600.000\$ đến 800.000\$.**
@@ -132,6 +132,7 @@ elif choice == 'My Project':
 """)
 
 #------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 elif choice=='Predict New Data':
     st.write("##### 1. Some data")
