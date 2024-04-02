@@ -12,18 +12,18 @@ menu = ["Introduction", "My Project", "Predict New Data"]
 choice = st.sidebar.selectbox('Danh mục', menu)
 
 #------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-data = pd.read_csv('D:\CourseDataScience\LDS0\project\project_3\model_project_3\OnlineRetail.csv', encoding='latin1')
-data_positive = pd.read_csv('D:\CourseDataScience\LDS0\project\project_3\model_project_3\data_positive.csv', encoding='latin1')
-data_RFM_raw = pd.read_csv('D:\CourseDataScience\LDS0\project\project_3\model_project_3\data_RFM_raw.csv', encoding='latin1')
-data_RFM_mean = pd.read_csv('D:\CourseDataScience\LDS0\project\project_3\model_project_3\data_RFM_mean.csv', encoding='latin1')
-data_RFM_with_id = pd.read_csv('D:\CourseDataScience\LDS0\project\project_3\model_project_3\data_RFM_with_id.csv', encoding='latin1')
-data_RFM_train = pd.read_csv('D:\CourseDataScience\LDS0\project\project_3\model_project_3\data_RFM_train.csv', encoding='latin1')
+data = pd.read_csv('OnlineRetail.csv', encoding='latin1')
+data_positive = pd.read_csv('data_positive.csv', encoding='latin1')
+data_RFM_raw = pd.read_csv('data_RFM_raw.csv', encoding='latin1')
+data_RFM_mean = pd.read_csv('data_RFM_mean.csv', encoding='latin1')
+data_RFM_with_id = pd.read_csv('data_RFM_with_id.csv', encoding='latin1')
+data_RFM_train = pd.read_csv('data_RFM_train.csv', encoding='latin1')
 
 # Model 
-file_name_1 = 'D:/CourseDataScience/LDS0/project/project_3/model_project_3/rfm_model.sav'
+file_name_1 = 'rfm_model.sav'
 loaded_model_1= pickle.load(open(file_name_1, 'rb' ))
 
-filename_2 = 'D:/CourseDataScience/LDS0/project/project_3/model_project_3/rfm_hierarchical_model.sav'
+filename_2 = 'rfm_hierarchical_model.sav'
 loaded_model_2 = pickle.load(open(filename_2, 'rb' ))
 
 # Box-Cox transform function
@@ -46,7 +46,7 @@ if choice == 'Introduction':
     st.subheader("GIỚI THIỆU")  
     st.subheader("Customer Segmentation") 
     # Hiển thị hình ảnh từ file
-    image = open("D:\CourseDataScience\LDS0\project\project_3\GUI_Project_3\Customer_Segmentation.png", "rb").read()
+    image = open("Customer_Segmentation.png", "rb").read()
     st.image(image, use_column_width=True)
     
     st.write("## I. Mục tiêu")  
@@ -84,12 +84,12 @@ elif choice == 'My Project':
 
     st.subheader("II.Trực quan hóa dữ liệu")
     st.write("### **1.Doanh thu theo quốc gia**")
-    image = open("D:/CourseDataScience/LDS0/project/project_3/model_project_3/Truc_quan_hoa/revenue_by_country.png", "rb").read()
+    image = open("Truc_quan_hoa/revenue_by_country.png", "rb").read()
     st.image(image, use_column_width=True)
     st.write("""### **Nhận xét:**
 #### - **Các khách hàng lớn thường tập trung ở UK, đây là một thị trường lớn cần tập trung vào quốc gia này.**""")
     st.write("### **2.Doanh thu theo tháng**")
-    image = open("D:/CourseDataScience/LDS0/project/project_3/model_project_3/Truc_quan_hoa/revenue_by_month.png", "rb").read()
+    image = open("Truc_quan_hoa/revenue_by_month.png", "rb").read()
     st.image(image, use_column_width=True)
     st.write("""### **Nhận xét:**
 #### - **Nếu chỉ xét ở năm 2011, doanh thu 8 tháng đầu năm khá ổn định ở mức 600.000\$ đến 800.000\$.**
@@ -101,9 +101,9 @@ elif choice == 'My Project':
     st.write("### **1.Kết quả**")
     st.dataframe(data_RFM_mean.head(10))
     st.write("### **2.Trực quan hóa**")
-    image = open("D:\\CourseDataScience\\LDS0\\project\\project_3\\model_project_3\\Unsupervised_Segments.png", "rb").read()
+    image = open("Unsupervised_Segments.png", "rb").read()
     st.image(image, use_column_width=True)
-    image = open("D:/CourseDataScience/LDS0/project/project_3/model_project_3/rfm_scatter_unsupervised.png", "rb").read()
+    image = open("rfm_scatter_unsupervised.png", "rb").read()
     st.image(image, use_column_width=True)
     st.write("""### **Nhận xét:**
 #### - **Kết quả của phương pháp phân loại sử dụng tập luật dựa trên dữ liệu RFM tương đối tốt. Số lượng khách hàng ở mỗi nhóm là khá đồng đều.**
@@ -132,71 +132,6 @@ elif choice == 'My Project':
 """)
 
 #------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-elif choice == 'a':
-    # Sử dụng các điều khiển nhập
-    # 1. Text
-    st.subheader("1. Text")
-    name = st.text_input("Enter your name")
-    st.write("Your name is", name)
-    # 2. Slider
-    st.subheader("2. Slider")
-    age = st.slider("How old are you?", 1, 100, 20)
-    st.write("I'm", age, "years old.")
-    # 3. Checkbox
-    st.subheader("3. Checkbox")
-    # agree = st.checkbox("I agree")
-    if st.checkbox("I agree"):
-        st.write("Great!")
-    # 4. Radio
-    st.subheader("4. Radio")
-    status = st.radio("What is your status?", ("Active", "Inactive"))
-    st.write("You are", status)
-    # 5. Selectbox
-    st.subheader("5. Selectbox")
-    occupation = st.selectbox("What is your occupation?", ["Student", "Teacher", "Others"])
-    st.write("You are a", occupation)
-    # 6. Multiselect
-    st.subheader("6. Multiselect")
-    location = st.multiselect("Where do you live?", ("Hanoi", "HCM", "Danang", "Hue"))
-    st.write("You live in", location)
-    # 7. File Uploader
-    st.subheader("7. File Uploader")
-    file = st.file_uploader("Upload your file", type=["csv", "txt"])
-    if file is not None:
-        st.write(file)    
-    # 9. Date Input
-    st.subheader("9. Date Input")
-    date = st.date_input("Pick a date")
-    st.write("You picked", date)
-    # 10. Time Input
-    st.subheader("10. Time Input")
-    time = st.time_input("Pick a time")
-    st.write("You picked", time)
-    # 11. Display JSON
-    st.subheader("11. Display JSON")
-    json = st.text_input("Enter JSON", '{"name": "Alice", "age": 25}')
-    st.write("You entered", json)
-    # 12. Display Raw Code
-    st.subheader("12. Display Raw Code")
-    code = st.text_area("Enter code", "print('Hello, world!')")
-    st.write("You entered", code)
-    # Sử dụng điều khiển submit
-    st.subheader("Submit")
-    submitted = st.button("Submit")
-    if submitted:
-        st.write("You submitted the form.")
-        # In các thông tin phía trên khi người dùng nhấn nút Submit
-        st.write("Your name is", name)
-        st.write("I'm", age, "years old.")
-        st.write("You are", status)
-        st.write("You are a", occupation)
-        st.write("You live in", location)
-        st.write("You picked", date)
-        st.write("You picked", time)
-        st.write("You entered", json)
-        st.write("You entered", code)
-
 
 elif choice=='Predict New Data':
     st.write("##### 1. Some data")
